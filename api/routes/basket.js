@@ -27,7 +27,8 @@ router.get('/', (request,response,next) => {
 
 router.get('/:id', (request,response,next)=>{
     console.log(request.params.id);
-    Basket.findById(request.params.id)
+   // Basket.findById(request.params.id)
+    Basket.find({ code: request.params.id}).exec()
     .then(result =>{
         response.status(200).json({
             basket:result.code

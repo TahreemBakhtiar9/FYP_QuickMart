@@ -16,7 +16,7 @@ cloudinary.config({
   });
 
 // fetch 
-router.get('/', checkAuth, (request,response,next) => {
+router.get('/', (request,response,next) => {
     Product.find()
     .then(result=>{
         response.status(200).json({
@@ -33,7 +33,9 @@ router.get('/', checkAuth, (request,response,next) => {
 //fetch with id
 router.get('/:id', (request,response,next)=>{
     console.log(request.params.id);
-    Product.findById(request.params.id)
+    Product.find({ code: request.params.id}).exec()
+   // Product.find(request.params.id)
+   // Product.findById(request.params.id)
     .then(result =>{
         response.status(200).json({
             product:result
@@ -46,6 +48,27 @@ router.get('/:id', (request,response,next)=>{
         })
     })
 })
+
+
+
+// router.get('/:id', (request,response,next)=>{
+//     console.log(request.params.id);
+//    Product.find(request.params.id)
+//     Product.findById(request.params.id)
+//     .then(result =>{
+//         response.status(200).json({
+//             product:result
+//         })
+//     })
+//     .catch(err=>{
+//         console.log(err);
+//         response.status(500).json({
+//             error:err
+//         })
+//     })
+// })
+
+
 
 //add
 router.post('/', (request,response,next) => {
@@ -64,21 +87,23 @@ router.post('/', (request,response,next) => {
             quantity: request.body.quantity,
             price: request.body.price,
             image: result.url
+            
         })
+        console.log("checkpost102")
 
-        // QRCode.toFile(`C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputProducts/${request.body.code}.png`, `${request.body.code}`, {
-        //     errorCorrectionLevel: 'H'
-        //   }, function(err) {
-        //     if (err) throw err;
-        //     console.log('QR code saved!');
-        //   });
+        QRCode.toFile(`C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputProducts/${request.body.code}.png`, `${request.body.code}`, {
+            errorCorrectionLevel: 'H'
+          }, function(err) {
+            if (err) throw err;
+            console.log('QR code saved!');
+          });
 
-
+        
         product.save()
         .then(result=>{
             console.log(result);
             response.status(200).json({
-                newProduct: result
+                newProduct: result,
             })
         })
         .catch(err=>{
@@ -90,6 +115,7 @@ router.post('/', (request,response,next) => {
     })
     
 })
+
 
 
 router.delete('/:id',(req,res,next)=>{
