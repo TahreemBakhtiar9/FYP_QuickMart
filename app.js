@@ -11,12 +11,12 @@ var QrCode = require('qrcode-reader');
 
 var buffer = fs.readFileSync(__dirname + '/image.png'); // scan input, read image &create a buffer
 
-// Parse the image  
+// //Parse the image  
 // Jimp.read(buffer, function(err, image) {
 //     if (err) {
 //         console.error(err);
 //     }
-//     let qrcode = new qrCode();
+//     let qrcode = new QrCode();
 //     qrcode.callback = function(err, value) {
 //         if (err) {
 //             console.error(err);

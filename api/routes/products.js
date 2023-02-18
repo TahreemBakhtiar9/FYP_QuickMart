@@ -47,9 +47,11 @@ router.get('/:id', (request,response,next)=>{
 
 //add
 router.post('/', (request,response,next) => {
+    console.log(request.body);
     const file = request.files.photo; //frontside se jo naam aarha usske mutabik change name "photo"
     cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
         console.log(result);
+        console.log("checkpost 101")
         const product = new Product({
             _id: new mongoose.Types.ObjectId,
             productName: request.body.productName,
