@@ -4,9 +4,11 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const checkAuth = require('../middleware/check-auth');
 const cloudinary = require('cloudinary').v2;
+const QRCode = require('qrcode');
+//const Jimp = require("jimp");
+const fs = require('fs')
 
 
-// update this part 
 cloudinary.config({
     cloud_name: "dhzmpfkvz",
     api_key: "295597321971433",
@@ -49,9 +51,12 @@ router.get('/:id', (request,response,next)=>{
 router.post('/', (request,response,next) => {
     console.log(request.body);
     const file = request.files.photo; //frontside se jo naam aarha usske mutabik change name "photo"
+    //console.log
+   // console.log(request.body.productName, request.body.code, request.body.quantity);
     cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
         console.log(result);
         console.log("checkpost 101")
+       // console.log(request.body.productName, request.body.code, request.body.quantity);
         const product = new Product({
             _id: new mongoose.Types.ObjectId,
             productName: request.body.productName,
@@ -60,6 +65,15 @@ router.post('/', (request,response,next) => {
             price: request.body.price,
             image: result.url
         })
+
+        // QRCode.toFile(`C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputProducts/${request.body.code}.png`, `${request.body.code}`, {
+        //     errorCorrectionLevel: 'H'
+        //   }, function(err) {
+        //     if (err) throw err;
+        //     console.log('QR code saved!');
+        //   });
+
+
         product.save()
         .then(result=>{
             console.log(result);

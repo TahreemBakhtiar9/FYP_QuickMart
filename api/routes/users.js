@@ -4,6 +4,42 @@ const mongoose = require('mongoose');
 const User = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+// const QRCode = require('qrcode');
+// const Jimp = require("jimp");
+// const fs = require('fs')
+// const qrCodeReader = require('qrcode-reader');
+// const buffer = fs.readFileSync('C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/file.png');
+ 
+//generating QR code
+// QRCode.toFile('C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/file.png', 'Encode this text in QR code', {
+//   errorCorrectionLevel: 'H'
+// }, function(err) {
+//   if (err) throw err;
+//   console.log('QR code saved!');
+// });
+
+
+
+ 
+// // __ Parse the image using Jimp.read() 
+// Jimp.read(buffer, function(err, image) {
+//     if (err) {
+//         console.error(err);
+//     }
+// // __ Creating an instance of qrcode-reader
+//     const qrCodeInstance = new qrCodeReader();
+//     qrCodeInstance.callback = function(err, value) {
+//         if (err) {
+//             console.error(err);
+//         }
+// // __ Printing the decrypted value
+//         console.log(value.result);
+//     };
+// // __ Decoding the QR code
+//     qrCodeInstance.decode(image.bitmap);
+// });
+
+
 
 
 

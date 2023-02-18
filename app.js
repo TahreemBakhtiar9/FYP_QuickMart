@@ -5,11 +5,12 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const productsRoute = require('./api/routes/products');
 const fileUpload = require('express-fileupload');
-var Jimp = require("jimp");
-var fs = require('fs')
-var QrCode = require('qrcode-reader');
+const basketRoute = require('./api/routes/basket');
+// var Jimp = require("jimp");
+// var fs = require('fs')
+// var QrCode = require('qrcode-reader');
 
-var buffer = fs.readFileSync(__dirname + '/image.png'); // scan input, read image &create a buffer
+// var buffer = fs.readFileSync(__dirname + '/image.png'); // scan input, read image &create a buffer
 
 // //Parse the image  
 // Jimp.read(buffer, function(err, image) {
@@ -46,6 +47,7 @@ app.use(bodyParser.json());
 
 app.use('/users', userRoute);
 app.use('/products', productsRoute);
+app.use('/basket', basketRoute);
 
 // app.use((req,res,next)=>{
 //     res.status(404).json({
