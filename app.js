@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const app = express();
 const userRoute = require('./api/routes/users');
 const mongoose = require('mongoose');
@@ -6,6 +7,8 @@ const bodyParser = require('body-parser');
 const productsRoute = require('./api/routes/products');
 const fileUpload = require('express-fileupload');
 const basketRoute = require('./api/routes/basket');
+const paymentRoute = require('./api/routes/payment');
+// const payment = require('./api/model/payment');
 // var Jimp = require("jimp");
 // var fs = require('fs')
 // var QrCode = require('qrcode-reader');
@@ -28,6 +31,7 @@ const basketRoute = require('./api/routes/basket');
 //  });
 
 
+app.use(cors());
 mongoose.connect('mongodb+srv://TahreemBakhtiar:tahreem123@usersignup.prphnl3.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.on('error', err=>{
     console.log("Connection failed");
@@ -48,6 +52,7 @@ app.use(bodyParser.json());
 app.use('/users', userRoute);
 app.use('/products', productsRoute);
 app.use('/basket', basketRoute);
+app.use('/payment', paymentRoute);
 
 // app.use((req,res,next)=>{
 //     res.status(404).json({
