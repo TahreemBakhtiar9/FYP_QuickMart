@@ -89,7 +89,7 @@ router.post("/", (request, response, next) => {
   console.log("checkpost102");
 
   QRCode.toFile(
-    `D:/uni/backend/FYP_QuickMart/outputQR/${request.body.code}.png`,
+    `D:/uni/backend/FYP_QuickMart/outputProducts/${request.body.code}.png`,
     `${request.body.code}`,
     {
       errorCorrectionLevel: "H",
