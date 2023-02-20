@@ -3,13 +3,11 @@ const port = process.env.port || 3000;
 const app = require('./app');
 
 const server = http.createServer(app);
-
-server.get('/', (req, res)=>{
-    console.log('response');
-    res.send('response')
+server.get('/', (req,res) => {
+    console.log('request');
+    res.send('request');
 })
-server.listen(port,()=>{console.log('apps are running on local host: ' + port)});
-//server.listen(3000, console.log('app is running'));
+server.listen(3000, console.log('app is running'));
 
 // //Importing jimp module
 // var Jimp = require("jimp");
