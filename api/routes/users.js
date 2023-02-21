@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { signupValidation, loginValidation} = require('./api/middleware/validation');
 // const QRCode = require('qrcode');
 // const Jimp = require("jimp");
 // const fs = require('fs')
@@ -43,7 +44,7 @@ const jwt = require('jsonwebtoken');
 
 
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup',signupValidation, (req, res, next) => {
     bcrypt.hash(req.body.password,10,(err, hash)=>{
         if(err){
             return res.status(500).json({
@@ -77,7 +78,7 @@ router.post('/signup', (req, res, next) => {
 })
 
 
-router.post('/login',(req,res,next)=>{
+router.post('/login',loginValidation,(req,res,next)=>{
     User.find({userName:req.body.userName})
     .exec()
     .then(user=>{

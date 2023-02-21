@@ -69,52 +69,53 @@ router.get("/:id", (request, response, next) => {
 //add
 router.post("/", (request, response, next) => {
   console.log(request.body);
-  // const file = request.files.photo; //frontside se jo naam aarha usske mutabik change name "photo"
+   const file = request.files.photo; //frontside se jo naam aarha usske mutabik change name "photo"
   //console.log
   // console.log(request.body.productName, request.body.code, request.body.quantity);
-  // cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
-  //     console.log(result);
+   cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
+       console.log(result);
   //     console.log("checkpost 101")
+  product = new Product({
+        _id: new mongoose.Types.ObjectId(),
+        productName: request.body.productName,
+        code: request.body.code,
+        quantity: request.body.quantity,
+        price: request.body.price,
+        image: request.body.image,
+      });
+      console.log("checkpost102");
+    
+      QRCode.toFile(
+        `D:/uni/backend/FYP_QuickMart/outputProducts/${request.body.code}.png`,
+        `${request.body.code}`,
+        {
+          errorCorrectionLevel: "H",
+        },
+        function (err) {
+          if (err) throw err;
+          console.log("QR code saved!");
+        }
+      );
+    
+      product
+        .save()
+        .then((result) => {
+          console.log(result);
+          response.status(200).json({
+            newProduct: result,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          response.status(500).json({
+            error: err,
+          });
+        });
+    });
   //    // console.log(request.body.productName, request.body.code, request.body.quantity);
 
-  // })
-  const product = new Product({
-    _id: new mongoose.Types.ObjectId(),
-    productName: request.body.productName,
-    code: request.body.code,
-    quantity: request.body.quantity,
-    price: request.body.price,
-    image: request.body.image,
-  });
-  console.log("checkpost102");
-
-  QRCode.toFile(
-    `D:/uni/backend/FYP_QuickMart/outputProducts/${request.body.code}.png`,
-    `${request.body.code}`,
-    {
-      errorCorrectionLevel: "H",
-    },
-    function (err) {
-      if (err) throw err;
-      console.log("QR code saved!");
-    }
-  );
-
-  product
-    .save()
-    .then((result) => {
-      console.log(result);
-      response.status(200).json({
-        newProduct: result,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      response.status(500).json({
-        error: err,
-      });
-    });
-});
+   });
+//    
 
 router.delete("/", (req, res, next) => {
   Product.deleteMany({})

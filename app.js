@@ -1,5 +1,6 @@
 const express = require('express');
 var cors = require('cors');
+const morgan = require('morgan');
 const app = express();
 const userRoute = require('./api/routes/users');
 const mongoose = require('mongoose');
@@ -8,6 +9,8 @@ const productsRoute = require('./api/routes/products');
 const fileUpload = require('express-fileupload');
 const basketRoute = require('./api/routes/basket');
 const paymentRoute = require('./api/routes/payment');
+// const { signupValidation, loginValidation} = require('./api/middleware/validation');
+
 // const payment = require('./api/model/payment');
 // var Jimp = require("jimp");
 // var fs = require('fs')
@@ -31,7 +34,10 @@ const paymentRoute = require('./api/routes/payment');
 //  });
 
 
+
 app.use(cors());
+app.use(morgan('dev'));
+
 mongoose.connect('mongodb+srv://TahreemBakhtiar:tahreem123@usersignup.prphnl3.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.on('error', err=>{
     console.log("Connection failed");
@@ -44,6 +50,25 @@ mongoose.connection.on('connected', connected=>{
 app.use(fileUpload({
     useTempFiles:true
 }))
+
+// app.get('/', (req, res) => {
+//     res.send('Node js file upload rest apis');
+// }); 
+// app.post('/register', signupValidation, (req, res, next) => {
+//    // your registration code
+// }); 
+// app.post('/login', loginValidation, (req, res, next) => {
+//    // your login code
+// }); 
+// // Handling Errors
+// app.use((err, req, res, next) => {
+//     // console.log(err);
+//     err.statusCode = err.statusCode || 500;
+//     err.message = err.message || "Internal Server Error";
+//     res.status(err.statusCode).json({
+//       message: err.message,
+//     });
+// });
 
 
 app.use(bodyParser.urlencoded({extended:false}));
