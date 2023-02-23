@@ -81,12 +81,12 @@ router.post("/", (request, response, next) => {
         code: request.body.code,
         quantity: request.body.quantity,
         price: request.body.price,
-        image: request.body.image,
+        image: result.url,
       });
       console.log("checkpost102");
     
       QRCode.toFile(
-        `D:/uni/backend/FYP_QuickMart/outputProducts/${request.body.code}.png`,
+        `C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputProducts/${request.body.code}.png`,
         `${request.body.code}`,
         {
           errorCorrectionLevel: "H",
