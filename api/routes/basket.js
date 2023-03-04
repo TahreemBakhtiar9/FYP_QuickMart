@@ -46,6 +46,7 @@ router.post("/", (request, response, next) => {
     _id: new mongoose.Types.ObjectId(),
     basketName: request.body.basketName,
     code: request.body.code,
+    status: request.body.status,
   });
   QRCode.toFile(
     `C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputQR/${request.body.code}.png`,
@@ -111,6 +112,7 @@ router.put("/:id", (req, res, next) => {
       $set: {
         basketName: request.body.basketName,
         code: request.body.code,
+        status: request.body.status,
       },
     }
   )
