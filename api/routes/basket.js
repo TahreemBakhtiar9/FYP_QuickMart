@@ -48,7 +48,7 @@ router.post("/", (request, response, next) => {
     code: request.body.code,
   });
   QRCode.toFile(
-    `D:/uni/backend/FYP_QuickMart/outputQR/${request.body.code}.png`,
+    `C:/Users/Tehreem-PC/Desktop/UNI/API/FYP/SignUp/outputQR/${request.body.code}.png`,
     `${request.body.code}`,
     {
       errorCorrectionLevel: "H",
