@@ -41,7 +41,8 @@ router.post("/", (request, response, next) => {
     userName: request.body.userName,
     email: request.body.email,
     phone: request.body.phone,
-    amount: request.body.amount,
+    totalAmount: request.body.totalAmount,
+    totalCount: request.body.totalCount,
   });
 
   payment
@@ -94,10 +95,11 @@ router.put("/:id", (req, res, next) => {
     { _id: req.params.id },
     {
       $set: {
-        userName: request.body.userName,
-        email: request.body.email,
-        phone: request.body.phone,
-        amount: request.body.amount,
+    userName: request.body.userName,
+    email: request.body.email,
+    phone: request.body.phone,
+    totalAmount: request.body.totalAmount,
+    totalCount: request.body.totalCount,
       },
     }
   )

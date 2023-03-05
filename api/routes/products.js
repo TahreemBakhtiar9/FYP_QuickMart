@@ -154,30 +154,40 @@ router.delete("/", (req, res, next) => {
     });
 });
 //update
-router.put("/:id", (req, res, next) => {
-  Product.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: {
-        productName: req.body.productName,
-        code: req.body.code,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        image: req.body.image,
-      },
-    }
-  )
-    .then((result) => {
-      res.status(200).json({
-        updated_productData: result,
+router.put("/:code", (req, res, next) => {
+  const file = req.files.photo; //frontside se jo naam aarha usske mutabik change name "photo"
+  cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+    console.log(result);
+    Product.findOneAndUpdate(
+      { _code: req.params.code },
+      {
+        $set: {
+          productName: req.body.productName,
+          //code: req.body.code,
+          quantity: req.body.quantity,
+          price: req.body.price,
+          image: req.body.image,
+        },
+      }
+    )
+      .then((result) => {
+        res.status(200).json({
+          updated_productData: result,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
-});
+  });
+}); 
+    
+
+  
+  
+
+
 
 module.exports = router;

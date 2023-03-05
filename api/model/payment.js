@@ -5,7 +5,8 @@ const paymentSchema = new mongoose.Schema({
     userName: String,
     email: String,
     phone: String,
-    amount:Number,
+    totalAmount:Number,
+    totalCount: Number,
 })
 
 module.exports = mongoose.model('Payment', paymentSchema);
