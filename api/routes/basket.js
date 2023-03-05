@@ -110,9 +110,9 @@ router.put("/:id", (req, res, next) => {
     { _id: req.params.id },
     {
       $set: {
-        basketName: request.body.basketName,
-        code: request.body.code,
-        status: request.body.status,
+        basketName: req.body.basketName,
+        code: req.body.code,
+        status: req.body.status,
       },
     }
   )

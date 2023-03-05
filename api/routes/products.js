@@ -82,6 +82,7 @@ router.post("/", (request, response, next) => {
       quantity: request.body.quantity,
       price: request.body.price,
       image: result.url,
+      description: request.body.description,
     });
     console.log("checkpost102");
 
@@ -167,6 +168,7 @@ router.put("/:code", (req, res, next) => {
           quantity: req.body.quantity,
           price: req.body.price,
           image: req.body.image,
+          description: req.body.description,
         },
       }
     )
@@ -183,11 +185,5 @@ router.put("/:code", (req, res, next) => {
       });
   });
 }); 
-    
-
-  
-  
-
-
 
 module.exports = router;
